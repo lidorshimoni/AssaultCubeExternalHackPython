@@ -34,7 +34,14 @@ process_handle = ctypes.windll.kernel32.OpenProcess(PROCESS_ALL_ACCESS, False, p
 # PROCESS = win32api.OpenProcess(PROCESS_ALL_ACCESS,0,process_id)
 # print("PROCESS: ", PROCESS, "PROCESS HANDLE: ", PROCESS.handle)
 
-ADDRESS1 = 0x17E360 +  0x400000
+#get basee address of module
+# module = win32process.EnumProcessModules(PROCESS)
+# print("MODULE: ", module)
+# base_address = module[0]
+# print("BASE ADDRESS: ", base_address)
+
+BASE_ADDRESS = 0x400000
+ADDRESS1 = 0x17E360 + BASE_ADDRESS
 ADDRESS2 = ctypes.pointer(ctypes.c_int(0))
 bytes_read = ctypes.c_size_t()
 result = rPM(process_handle, ADDRESS1, ADDRESS2, ctypes.sizeof(ADDRESS2), ctypes.byref(bytes_read))
